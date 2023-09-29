@@ -13,7 +13,6 @@ import static com.codeborne.selenide.Selectors.byXpath;
 public class CreditGate {
         private final SelenideElement heading = $$(".heading").findBy(Condition.text("Кредит по данным карты"));
         SelenideElement form = $(".form");
-
         private SelenideElement cardNumber = form.$("input[placeholder='0000 0000 0000 0000']");
         private final SelenideElement months = form.$("input[placeholder='08']");
         private final SelenideElement years = form.$("input[placeholder='22']");

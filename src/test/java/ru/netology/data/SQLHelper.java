@@ -28,10 +28,10 @@ public class SQLHelper {
         return queryRunner.query(connection, SQLQuery, new ScalarHandler<String>());
     }
 
-
     public static void expectedPaymentStatus(String status) {
         assertEquals(status, getPaymentStatus());
     }
+
     @SneakyThrows
     public static String getCreditStatus() {
         var connection = getConnect();
@@ -39,10 +39,10 @@ public class SQLHelper {
         return queryRunner.query(connection, SQLQuery, new ScalarHandler<String>());
     }
 
-
     public static void expectedCreditStatus(String status) {
         assertEquals(status, getCreditStatus());
     }
+
     @SneakyThrows
     public static void cleanDatabase() {
         var connection = getConnect();

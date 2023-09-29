@@ -9,6 +9,9 @@ import java.time.LocalDate;
 
 public class DataHelper {
 
+    private static Faker faker = new Faker(new Locale("en"));
+    private static Faker fakerRu = new Faker(new Locale("ru"));
+
 
     public static cardNumber getApprovedCard() {  /// дейст валид карта
         cardNumber cardNumber = new cardNumber("4444 4444 4444 4441");
@@ -55,41 +58,31 @@ public class DataHelper {
     }
 
     public static String getValidName() {     // валид владелец
-        Faker faker = new Faker(new Locale("en"));
-
         String name = faker.name().firstName() + " " + faker.name().lastName();
         return name;
     }
 
     public static String getValidNameWithDash() {  // валид владелец с дефисом
-        Faker faker = new Faker(new Locale("en"));
-
         String name = faker.name().firstName() + " " + faker.name().lastName() + "-" + faker.name().lastName();
         return name;
     }
 
     public static String getInvalidNameRu() {  // невалид владелец кирилиц
-        Faker faker = new Faker(new Locale("ru"));
-
         String name = faker.name().firstName() + " " + faker.name().lastName();
         return name;
     }
 
     public static String getIncompleteName() { //невадил владелец имя
-        Faker faker = new Faker(new Locale("en"));
         String name = faker.name().firstName();
         return name;
     }
 
     public static String getValidCVC() {  // валид СVV
-        String code = String.valueOf(Math.random() * (899) + 100);
-        return code;
+        return faker.numerify("###");
     }
 
     public static String getInvalidCVC() {  // невалид CVV
-        int number = (int) Math.random() * (89) + 10;
-        String code = String.valueOf(number);
-        return code;
+        return faker.numerify("##");
     }
 
     @Value
