@@ -44,8 +44,8 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
-        paymentGate.setMonth(DataHelper.getValidMonth());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setMonth(DataHelper.getMonth(0));
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
@@ -62,8 +62,8 @@ public class PaymentAndCreditTest {
         var paymentPage = start.buy();
 
         paymentPage.setCardNumber(DataHelper.getApprovedCard());
-        paymentPage.setMonth(DataHelper.getValidMonth());
-        paymentPage.setYear(DataHelper.getValidYear());
+        paymentPage.setMonth(DataHelper.getMonth(0));
+        paymentPage.setYear(DataHelper.getYear(0));
         paymentPage.setHolder(DataHelper.getValidNameWithDash());
         paymentPage.setCVC(DataHelper.getValidCVC());
         paymentPage.buttonContinueClick();
@@ -80,8 +80,8 @@ public class PaymentAndCreditTest {
         var paymentPage = start.buy();
 
         paymentPage.setCardNumber(DataHelper.getApprovedCard());
-        paymentPage.setMonth(DataHelper.getValidMonth());
-        paymentPage.setYear(DataHelper.getValidYearPlus5());
+        paymentPage.setMonth(DataHelper.getMonth(0));
+        paymentPage.setYear(DataHelper.getYear(5));
         paymentPage.setHolder(DataHelper.getValidName());
         paymentPage.setCVC(DataHelper.getValidCVC());
         paymentPage.buttonContinueClick();
@@ -99,8 +99,8 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getDeclinedCard());
-        paymentGate.setMonth(DataHelper.getValidMonth());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setMonth(DataHelper.getMonth(0));
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
@@ -117,12 +117,12 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getInvalidCard());
-        paymentGate.setMonth(DataHelper.getValidMonth());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setMonth(DataHelper.getMonth(0));
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationInvalidFormat();
+        paymentGate.checkNotification("Неверный формат");
     }
 
     @Test // баг
@@ -134,12 +134,12 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
-        paymentGate.setMonth(DataHelper.getValidMonth());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setMonth(DataHelper.getMonth(0));
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setHolder(DataHelper.getInvalidNameRu());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationErrorLanguageHolder();
+        paymentGate.checkNotification("Неверный формат");
     }
 
     @Test  // баг
@@ -151,12 +151,12 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
-        paymentGate.setMonth(DataHelper.getValidMonth());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setMonth(DataHelper.getMonth(0));
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setHolder(DataHelper.getIncompleteName());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationInvalidFormat();
+        paymentGate.checkNotification("Неверный формат");
     }
 
     @Test
@@ -169,11 +169,11 @@ public class PaymentAndCreditTest {
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
         paymentGate.setMonth(DataHelper.getInValidMonth());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationInvalidFormat();
+        paymentGate.checkNotification("Неверный формат");
     }
 
     @Test
@@ -185,12 +185,12 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
-        paymentGate.setMonth(DataHelper.getValidMonth());
-        paymentGate.setYear(DataHelper.getInvalidYearBeforeLimit());
+        paymentGate.setMonth(DataHelper.getMonth(0));
+        paymentGate.setYear(DataHelper.getYear(-1));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationErrorDateCard();
+        paymentGate.checkNotification("Истёк срок действия карты");
     }
 
     @Test
@@ -202,12 +202,12 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
-        paymentGate.setMonth(DataHelper.getValidMonth());
-        paymentGate.setYear(DataHelper.getInvalidYearOverLimit());
+        paymentGate.setMonth(DataHelper.getMonth(0));
+        paymentGate.setYear(DataHelper.getYear(6));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationWrongDateCard();
+        paymentGate.checkNotification("Неверно указан срок действия карты");
     }
 
     @Test
@@ -219,12 +219,12 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
-        paymentGate.setMonth(DataHelper.getValidMonth());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setMonth(DataHelper.getMonth(0));
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.setCVC(DataHelper.getInvalidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationInvalidFormat();
+        paymentGate.checkNotification("Неверный формат");
     }
     @Test
     @Order(2-8)
@@ -235,12 +235,12 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
-        paymentGate.setMonth(DataHelper.getPreviousMonth());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setMonth(DataHelper.getMonth(1));
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationWrongDateCard();
+        paymentGate.checkNotification("Неверно указан срок действия карты");
     }
 
     @Test
@@ -251,12 +251,12 @@ public class PaymentAndCreditTest {
         start.startPage();
         var paymentGate = start.buy();
 
-        paymentGate.setMonth(DataHelper.getValidMonth());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setMonth(DataHelper.getMonth(0));
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationInvalidFormat();
+        paymentGate.checkNotification("Неверный формат");
     }
 
     @Test
@@ -268,11 +268,11 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationInvalidFormat();
+        paymentGate.checkNotification("Неверный формат");
     }
 
     @Test
@@ -284,11 +284,11 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
-        paymentGate.setMonth(DataHelper.getValidMonth());
+        paymentGate.setMonth(DataHelper.getMonth(0));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationInvalidFormat();
+        paymentGate.checkNotification("Неверный формат");
     }
 
     @Test
@@ -300,11 +300,11 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
-        paymentGate.setMonth(DataHelper.getValidMonth());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setMonth(DataHelper.getMonth(0));
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setCVC(DataHelper.getValidCVC());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationInput();
+        paymentGate.checkNotification("Поле обязательно для заполнения");
     }
 
     @Test
@@ -316,11 +316,11 @@ public class PaymentAndCreditTest {
         var paymentGate = start.buy();
 
         paymentGate.setCardNumber(DataHelper.getApprovedCard());
-        paymentGate.setMonth(DataHelper.getValidMonth());
-        paymentGate.setYear(DataHelper.getValidYear());
+        paymentGate.setMonth(DataHelper.getMonth(0));
+        paymentGate.setYear(DataHelper.getYear(0));
         paymentGate.setHolder(DataHelper.getValidName());
         paymentGate.buttonContinueClick();
-        paymentGate.checkNotificationInput();
+        paymentGate.checkNotification("Поле обязательно для заполнения");
     }
 
     @Test
@@ -332,8 +332,8 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
@@ -350,8 +350,8 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getValidNameWithDash());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
@@ -368,8 +368,8 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getValidYearPlus5());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(5));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
@@ -387,8 +387,8 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getDeclinedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
@@ -405,12 +405,12 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getInvalidCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationInvalidFormat();
+        creditGate.checkNotification("Неверный формат");
     }
 
     @Test   // баг
@@ -422,12 +422,12 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getInvalidNameRu());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationErrorLanguageHolder();
+        creditGate.checkNotification("Неверный формат");
     }
 
     @Test  // баг
@@ -439,12 +439,12 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getIncompleteName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationInvalidFormat();
+        creditGate.checkNotification("Неверный формат");
     }
 
     @Test
@@ -457,11 +457,11 @@ public class PaymentAndCreditTest {
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
         creditGate.setMonth(DataHelper.getInValidMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationInvalidFormat();
+        creditGate.checkNotification("Неверный формат");
     }
 
     @Test
@@ -473,12 +473,12 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getInvalidYearBeforeLimit());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(-1));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationErrorDateCard();
+        creditGate.checkNotification("Истёк срок действия карты");
     }
 
     @Test
@@ -490,12 +490,12 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getInvalidYearOverLimit());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(6));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationWrongDateCard();
+        creditGate.checkNotification("Неверно указан срок действия карты");
     }
 
     @Test
@@ -507,12 +507,12 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getInvalidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationInvalidFormat();
+        creditGate.checkNotification("Неверный формат");
     }
     @Test
     @Order(4-8)
@@ -523,12 +523,12 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getPreviousMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setMonth(DataHelper.getMonth(1));
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationWrongDateCard();
+        creditGate.checkNotification("Неверно указан срок действия карты");
     }
 
     @Test
@@ -539,12 +539,12 @@ public class PaymentAndCreditTest {
         start.startPage();
         var creditGate = start.buyInCredit();
 
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationInvalidFormat();
+        creditGate.checkNotification("Неверный формат");
     }
 
     @Test
@@ -556,11 +556,11 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationInvalidFormat();
+        creditGate.checkNotification("Неверный формат");
     }
 
     @Test
@@ -572,11 +572,11 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
+        creditGate.setMonth(DataHelper.getMonth(0));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationInvalidFormat();
+        creditGate.checkNotification("Неверный формат");
     }
 
     @Test
@@ -588,11 +588,11 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setCVC(DataHelper.getValidCVC());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationInput();
+        creditGate.checkNotification("Поле обязательно для заполнения");
     }
 
     @Test
@@ -604,11 +604,11 @@ public class PaymentAndCreditTest {
         var creditGate = start.buyInCredit();
 
         creditGate.setCardNumber(DataHelper.getApprovedCard());
-        creditGate.setMonth(DataHelper.getValidMonth());
-        creditGate.setYear(DataHelper.getValidYear());
+        creditGate.setMonth(DataHelper.getMonth(0));
+        creditGate.setYear(DataHelper.getYear(0));
         creditGate.setHolder(DataHelper.getValidName());
         creditGate.buttonContinueClick();
-        creditGate.checkNotificationInput();
+        creditGate.checkNotification("Поле обязательно для заполнения");
     }
 
 }

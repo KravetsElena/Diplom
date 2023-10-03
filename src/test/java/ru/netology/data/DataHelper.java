@@ -6,6 +6,7 @@ import lombok.Value;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.time.LocalDate;
+import java.util.Random;
 
 public class DataHelper {
 
@@ -28,33 +29,19 @@ public class DataHelper {
         return cardNumber;
     }
 
-    public static String getValidMonth() {    /// валид месяц
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
+    public static String getMonth(int month) {    ///  месяц
+
+        return LocalDate.now().minusMonths(month).format(DateTimeFormatter.ofPattern("MM"));
     }
 
     public static String getInValidMonth() {    /// невалид месяц 1-9
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("M"));
+
+        var month = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        return month[new Random().nextInt(month.length)];
     }
 
-    public static String getPreviousMonth() {    ///невалид месяц текущ -1
-        return LocalDate.now().minusMonths(1).format(DateTimeFormatter.ofPattern("MM"));
-    }
-
-    public static String getValidYear() {  /// валид год текущ
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("YY"));
-    }
-
-    public static String getValidYearPlus5() {  /// валид год 23-28
-        return LocalDate.now().plusYears(5).format(DateTimeFormatter.ofPattern("YY"));
-    }
-
-    public static String getInvalidYearBeforeLimit() {  /// невалид год текущ -1
-        return LocalDate.now().minusYears(1).format(DateTimeFormatter.ofPattern("YY"));
-
-    }
-
-    public static String getInvalidYearOverLimit() {  ///невалид год текущ+6
-        return LocalDate.now().plusYears(6).format(DateTimeFormatter.ofPattern("YY"));
+    public static String getYear( int years) {  /// год
+        return LocalDate.now().plusYears(years).format(DateTimeFormatter.ofPattern("YY"));
     }
 
     public static String getValidName() {     // валид владелец
@@ -68,7 +55,7 @@ public class DataHelper {
     }
 
     public static String getInvalidNameRu() {  // невалид владелец кирилиц
-        String name = faker.name().firstName() + " " + faker.name().lastName();
+        String name = fakerRu.name().firstName() + " " + fakerRu.name().lastName();
         return name;
     }
 
